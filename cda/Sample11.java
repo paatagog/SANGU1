@@ -7,6 +7,4 @@ public class Sample11 {
 			System.out.println(i);
 		}
 	}
-
-
 }
