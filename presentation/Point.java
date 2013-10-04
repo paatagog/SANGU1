@@ -11,7 +11,10 @@ public class Point {
 	}
 
 	public double distanceFromCenter() {
-		return Math.sqrt(x * x + y * y);
+		Point p = new Point();
+		p.setX(0);
+		p.setY(0);
+		return distance(p);
 	}
 
 	public double getX() {
