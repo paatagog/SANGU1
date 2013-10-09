@@ -9,7 +9,7 @@ public class PrimeNumbers {
 		
 		while(number <= 1000){
 			boolean is_prime = true;
-			for(divisor = 2; divisor < Math.sqrt(number); divisor++){
+			for(divisor = 2; divisor <= Math.sqrt(number); divisor++){
 				if (number % divisor == 0){
 					is_prime = false;
 					break;
