@@ -5,8 +5,8 @@ public class VectorTest {
 		
 		Vector firstVector;
 		firstVector = new Vector();
-		firstVector.setX(3);
-		firstVector.setY(3);
+		firstVector.setX(10);
+		firstVector.setY(10);
 		
 		Vector secondVector;
 		secondVector = new Vector();

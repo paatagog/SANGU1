@@ -24,14 +24,14 @@ public class Vector {
 		return x * a.x + y * a.y;
 	}
 
-	public double[] sumOfVectors(Vector a) {
+	public String sumOfVectors(Vector a) {
 		double[] sumArr = new double[] { this.x + a.x, this.y + a.y };
-		return sumArr;
+		return "(" + sumArr[0] + "; " + sumArr[1] + ")";
 	}
 
-	public double[] subOfVectors(Vector a) {
+	public String subOfVectors(Vector a) {
 		double[] subArr = new double[] { this.x - a.x, this.y - a.y };
-		return subArr;
+		return "(" + subArr[0] + "; " + subArr[1] + ")";
 	}
 
 	private double lengthOfVector() {
