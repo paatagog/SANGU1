@@ -1,8 +1,8 @@
-package cda;
+package gogishvili.simpleprograms;
 
 public class Sample10 {
 
-	// მოვიფიქროთ უკეთესი ალგორითმი
+	// მ�?ვიფიქრ�?თ უკეთესი �?ლგ�?რითმი
 	public static void main(String[] args) {
 		int n = 100;
 		

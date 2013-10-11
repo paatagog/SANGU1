@@ -1,4 +1,4 @@
-package cda;
+package gogishvili.simpleprograms;
 
 public class Sample7 {
 	public static void move(int i, int j, int n) {

@@ -1,4 +1,4 @@
-package cda;
+package gogishvili.simpleprograms;
 
 public class Sample2 {
 

@@ -1,4 +1,7 @@
-package presentation;
+package gogishvili.presentation;
+
+import gogishvili.presentation.Point;
+
 
 public class Classtest {
 

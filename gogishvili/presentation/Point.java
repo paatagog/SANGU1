@@ -1,4 +1,4 @@
-package presentation;
+package gogishvili.presentation;
 
 public class Point {
 	
