@@ -4,16 +4,18 @@ public class Vector {
 	private double x;
 	private double y;
 
+	public Vector(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public Vector() {
+	}
 
 	public double scalarMult(Vector a) {
 		return x * a.x + y * a.y;
 	}
 
-	public String sumOfVectors(Vector a) {
-		double[] sumArr = new double[] { this.x + a.x, this.y + a.y };
-		return "(" + sumArr[0] + "; " + sumArr[1] + ")";
-	}
-	
 	public Vector sum(Vector v) {
 		Vector result = new Vector();
 		result.x = this.x + v.x;
@@ -21,17 +23,23 @@ public class Vector {
 		return result;
 	}
 
-	public String subOfVectors(Vector a) {
-		double[] subArr = new double[] { this.x - a.x, this.y - a.y };
-		return "(" + subArr[0] + "; " + subArr[1] + ")";
+	public Vector sub(Vector v) {
+		Vector result = new Vector();
+		result.x = this.x - v.x;
+		result.y = this.y - v.y;
+		return result;
 	}
 
 	private double lengthOfVector() {
 		return Math.sqrt(x * x + y * y);
 	}
 
-	public double vectorMultOfVectors(Vector a, double b) {
-		return lengthOfVector() * a.lengthOfVector() * Math.sin(b);
+	public double vectorMult(Vector a, double b) {
+		return this.lengthOfVector() * a.lengthOfVector() * Math.sin(b);
+	}
+
+	public String toString() {
+		return "x=" + x + "; y=" + y;
 	}
 
 	public double getX() {
