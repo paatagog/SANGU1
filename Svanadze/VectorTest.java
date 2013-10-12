@@ -16,7 +16,7 @@ public class VectorTest {
 		double angle = 45;
 		
 		System.out.println("Ori Vektoris Skalaruli Namravli: "
-				+ firstVector.scalarMultOfVectors(secondVector));
+				+ firstVector.scalarMult(secondVector));
 		System.out.println();
 		
 		System.out.println("Ori Vektoris Vektoruli Namravli: "

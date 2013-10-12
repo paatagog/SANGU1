@@ -3,7 +3,7 @@ package gogishvili.classes;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Student {
+public class Student extends Person {
 	
 	private String university;
 	
