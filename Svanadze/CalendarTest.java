@@ -3,7 +3,7 @@ package Svanadze;
 import java.sql.Date;
 import java.util.Calendar;
 
-public class SubtractionOfDates {
+public class CalendarTest {
 	public static void main(String[] args) {
 		Calendar cal = Calendar.getInstance();
 		Calendar cal2 = Calendar.getInstance();
