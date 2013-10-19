@@ -40,6 +40,6 @@ public class Student implements Printable {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-	
+
 
 }
