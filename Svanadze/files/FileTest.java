@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class FileTest {
-	public static String INPUT_FILE = "C:/java/input.txt";
+	public static String INPUT_FILE = "D:/JAVA/sources/Svanadze/files/fileinput.txt";
 
 	public static void main(String[] args) {
 		try {
