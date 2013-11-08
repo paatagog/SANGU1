@@ -42,5 +42,13 @@ public class Student extends Person {
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(firstName).append(" ").append(lastName).append(" ").append(personalNumber).append(" ").append(birthDate)
+		.append(university).append(" ").append(faculty).append(" ").append(startDate);
+		
+		return sb.toString();
+	}
 
 }

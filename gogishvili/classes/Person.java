@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class Person {
 	
-	private String firstName;
+	protected String firstName;
 	
-	private String lastName;
+	protected String lastName;
 	
-	private String personalNumber;
+	protected String personalNumber;
 	
-	private Date birthDate;
+	protected Date birthDate;
 
 	public String getFirstName() {
 		return firstName;
