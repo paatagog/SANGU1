@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PointReader {
-	public static double d = 14;
+	public static double d = 9;
 	public static String INPUT_FILE = "D:/kvizhinadze/java/Sangu/sources/inputPoint.txt";
 
 	public static void main(String[] args) {
