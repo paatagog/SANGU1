@@ -10,7 +10,7 @@ import java.util.List;
 import Svanadze.classes.Point;
 
 public class FileTest {
-	public static String INPUT_FILE = "c:/JAVA/sources/Svanadze/files/fileinput.txt";
+	public static String INPUT_FILE = "D:/JAVA/sources/Svanadze/files/fileinput.txt";
 
 	public static void main(String[] args) {
 		try {
