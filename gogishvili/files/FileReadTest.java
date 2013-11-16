@@ -9,6 +9,10 @@ import java.util.List;
 public class FileReadTest {
 	public static String INPUT_FILE = "c:/input.txt";
 	
+	public static void test() throws Exception {
+		throw new Exception();
+	}
+	
 	public static void main(String[] args) {
 		 try {
 	            List<String> lines = Files.readAllLines(Paths.get(INPUT_FILE), Charset.forName("UTF-8"));
@@ -16,8 +20,10 @@ public class FileReadTest {
 	                System.out.println(line);
 	            }
 	        } catch (IOException e) {
+//	        	System.out.print("Error occured");
 	            e.printStackTrace();
-	        }		
+	        }
+		 System.out.print("Finished");
 	}
 
 }
