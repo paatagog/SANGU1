@@ -11,9 +11,9 @@ import java.util.List;
 
 public class FileCheck {
 
-	public static String INPUT_FILE_A = "c:/java/sources/Svanadze/files/afile.txt";
-	public static String INPUT_FILE_B = "c:/java/sources/Svanadze/files/bfile.txt";
-	public static String OUTPUT_FILE = "c:/java/sources/Svanadze/files/resultfile.txt";
+	public static String INPUT_FILE_A = "d:/java/sources/Svanadze/files/afile.txt";
+	public static String INPUT_FILE_B = "d:/java/sources/Svanadze/files/bfile.txt";
+	public static String OUTPUT_FILE = "d:/java/sources/Svanadze/files/resultfile.txt";
 
 	public static void main(String[] args) {
 		try {
