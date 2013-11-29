@@ -38,7 +38,7 @@ public class ExcellFileRead {
 
 			for (int i = 0; i < rowNum-1; i++) {
 				money[i] = Double.parseDouble(company[i][1]) - Double.parseDouble(company[i][2]);
-				System.out.println(company[i][0] + ": " + money[i]);
+				log(company[i][0] + ": " + money[i]);
 			}
 
 		} catch (Exception ex) {
