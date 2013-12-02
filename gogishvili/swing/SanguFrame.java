@@ -18,14 +18,15 @@ public class SanguFrame extends JFrame {
 	}
 	
 	private void initGui() {
-		JButton quitButton = new JButton("Quit");
-
+	
 		JPanel panel = new JPanel();
 		getContentPane().add(panel);
 
 		panel.setLayout(null);
 
-		quitButton.setBounds(50, 60, 80, 30);
+		JButton quitButton = new JButton("ღილაკი");
+
+		quitButton.setBounds(50, 60, 100, 30);
 		quitButton.setToolTipText("ეს არის ფანჯრის დახურვის ღილაკი");
 
 		quitButton.addActionListener(new ActionListener() {
@@ -42,12 +43,8 @@ public class SanguFrame extends JFrame {
 
 		JMenuBar menubar = new JMenuBar();
         ImageIcon icon = new ImageIcon(getClass().getResource("resources\\exit.png"));
-        
-                                                                
-
         JMenu file = new JMenu("File");
         file.setMnemonic(KeyEvent.VK_F);
-
         JMenuItem eMenuItem = new JMenuItem("Exit", icon);
         eMenuItem.setMnemonic(KeyEvent.VK_E);
         eMenuItem.setToolTipText("Exit application");
@@ -58,20 +55,16 @@ public class SanguFrame extends JFrame {
         });
 
         file.add(eMenuItem);
-
         menubar.add(file);
-
         setJMenuBar(menubar);
-		
-		
-		
-		setTitle("Sangu Frame");
+       
+        
+        setTitle("Sangu Frame");
 		setSize(300, 200);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		
-		
+			
 	}
 
 }

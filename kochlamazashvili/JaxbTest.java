@@ -1,6 +1,7 @@
-package gogishvili.jaxb;
+package kochlamazashvili;
 
 import java.io.File;
+import java.util.Date;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -11,15 +12,15 @@ public class JaxbTest {
 	
 	private static final String FILE_NAME = "d:/object.xml"; 
 	
-	private static void serialize(Student s) {
+	private static void serialize(News s) {
 		try {
 
 			File file = new File(FILE_NAME);
-			JAXBContext jaxbContext = JAXBContext.newInstance(Student.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(News.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
 			// output pretty printed
-			jaxbMarshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 			jaxbMarshaller.marshal(s, file);
 			jaxbMarshaller.marshal(s, System.out);
@@ -31,14 +32,14 @@ public class JaxbTest {
 
 	}
 	
-	private static Student deserialize(String fileName) {
-		Student s = null;
+	private static News deserialize(String fileName) {
+		News s = null;
 		try {
 			File file = new File(fileName);
-			JAXBContext jaxbContext = JAXBContext.newInstance(Student.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(News.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			s = (Student) jaxbUnmarshaller.unmarshal(file);
+			s = (News) jaxbUnmarshaller.unmarshal(file);
 			System.out.println(s);
 
 		} catch (JAXBException e) {
@@ -48,12 +49,12 @@ public class JaxbTest {
 	}
 
 	public static void main(String[] args) {
-		Student s = new Student();
-		s.setFirstName("Giorgi");
-		s.setLastName("Giorgadze");
-		s.setAge(19);
-		s.setSex(Sex.MALE);
-		serialize(s);
-		s = deserialize(FILE_NAME);
+		News n = new News();
+		n.setDate(new Date());
+		n.setTitle("ვილნიუსის სამიტი <");
+		n.setContent("ხელი მოეწერა მნიშვნელოვან დოკუმენტს");
+		
+		serialize(n);
+		n = deserialize(FILE_NAME);
 	}
 }
