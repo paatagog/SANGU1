@@ -1,0 +1,8 @@
+Fri Nov 29 16:39:00 GST 2013: 98.138.253.109 yahoo.com
+Fri Nov 29 16:39:00 GST 2013: 173.252.110.27 facebook.com
+Fri Nov 29 16:39:00 GST 2013: 98.138.253.109 yahoo.com
+Fri Nov 29 16:39:00 GST 2013: 213.157.220.155 google.com
+Fri Nov 29 16:39:00 GST 2013: 65.55.58.201 microsoft.com
+Fri Nov 29 16:39:00 GST 2013: 80.241.245.34 allshares.ge
+Fri Nov 29 16:39:00 GST 2013: 72.21.210.29 imdb.com
+Fri Nov 29 16:39:00 GST 2013: 80.241.247.131 allmovies.ge
