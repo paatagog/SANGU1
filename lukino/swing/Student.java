@@ -1,17 +1,15 @@
-package Svanadze.swing;
+package lukino.swing;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name="სტუდენტი")
-@XmlType(propOrder = {"firstName", "lastName", "age"})
+@XmlRootElement
 public class Student {
 	public static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -20,8 +18,7 @@ public class Student {
 	private String lastName;
 
 	private Date date;
-	
-	@XmlElement(name="სახელი")
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -30,7 +27,6 @@ public class Student {
 		this.firstName = firstName;
 	}
 
-	@XmlElement(name="გვარი")
 	public String getLastName() {
 		return lastName;
 	}
@@ -39,13 +35,12 @@ public class Student {
 		this.lastName = lastName;
 	}
 
-	@XmlTransient
+	@XmlAttribute
 	public Date getDate() {
 		return date;
 	}
 
-	@XmlElement(name="ასაკი")
-	public int getAge() {
+	public int getAge(Date date) {
 		Calendar dob = Calendar.getInstance();
 		dob.setTime(date);
 		Calendar today = Calendar.getInstance();

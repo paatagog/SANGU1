@@ -8,21 +8,15 @@ import javax.xml.bind.Marshaller;
 
 public class XMLWriter {
 
-	public static void serialize(Student st) {
-		try {
-
-			File file = new File(FileReadWrite.FILE_NAME);
-			JAXBContext jaxbContext = JAXBContext.newInstance(Student.class);
+	public static void serialize(String fileName, StudentList students) throws JAXBException {
+			File file = new File(fileName);
+			JAXBContext jaxbContext = JAXBContext.newInstance(StudentList.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-			jaxbMarshaller.marshal(st, file);
-			jaxbMarshaller.marshal(st, System.out);
+			
+			jaxbMarshaller.marshal(students, file);
+			jaxbMarshaller.marshal(students, System.out);
 			System.out.println(" ");
-
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
 	}
 }

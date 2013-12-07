@@ -1,4 +1,4 @@
-package Svanadze.swing;
+package lukino.swing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,27 +21,18 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.xml.bind.JAXBException;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-@SuppressWarnings("serial")
 public class Frame extends JFrame {
-
 	private List<Student> students = new ArrayList<Student>();
-	
-	private SystemParameters systemParameters;
+	private static File outputFile = new File(FileReadWrite.OUTPUT_FILE);
+	private static PrintWriter out;
 
 	public Frame() {
-		initSystemParameters();
 		initGui();
-	}
-	
-	private void initSystemParameters() {
-		systemParameters = new SystemParameters();
-		systemParameters.loadSystemParameters();
 	}
 
 	private void initGui() {
@@ -50,14 +41,18 @@ public class Frame extends JFrame {
 		getContentPane().add(panel);
 
 		panel.setLayout(null);
-		
-		final AbstractButton excelButton = new JRadioButton("Excel");
-		final AbstractButton xmlButton = new JRadioButton("XML");
-		final AbstractButton textButton = new JRadioButton("Text Document");
 
-		excelButton.setBounds(10,10,150,20);
-		xmlButton.setBounds(10,40,150,20);
-		textButton.setBounds(10,70,150,20);
+		String excelString = "Excel";
+		String xmlString = "XML";
+		String textString = "Text Document";
+		
+		final AbstractButton excelButton = new JRadioButton(excelString);
+		final AbstractButton xmlButton = new JRadioButton(xmlString);
+		final AbstractButton textButton = new JRadioButton(textString);
+
+		excelButton.setBounds(10,10,20,20);
+		xmlButton.setBounds(10,40,20,20);
+		textButton.setBounds(10,70,20,20);
 		
 		excelButton.setMnemonic(KeyEvent.VK_E);
 		xmlButton.setMnemonic(KeyEvent.VK_X);
@@ -94,7 +89,7 @@ public class Frame extends JFrame {
 		lMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				try {
-					List<String> lines = Files.readAllLines(Paths.get(systemParameters.getInputFileName()),Charset.forName("UTF-8"));
+					List<String> lines = Files.readAllLines(Paths.get(FileReadWrite.INPUT_FILE),Charset.forName("UTF-8"));
 					for (String line : lines) {
 						String[] arr = line.split(" ");
 						Student s = new Student();
@@ -115,13 +110,13 @@ public class Frame extends JFrame {
 			public void actionPerformed(ActionEvent event) {
 				try {
 					if (textButton.isSelected()) {
-						PrintWriter out = new PrintWriter(new File(systemParameters.getOutputTextFileName()));
+						out = new PrintWriter(outputFile);
 						for (Student st : students) {
-							out.println(st.getFirstName() + " " + st.getLastName() + " " + st.getAge());
+							out.println(st.getFirstName() + " " + st.getLastName() + " " + st.getAge(st.getDate()));
 						}
 						out.close();
 					} else if (excelButton.isSelected()) {
-						FileOutputStream fileOut = new FileOutputStream(systemParameters.getOutputExcelFileName());
+						FileOutputStream fileOut = new FileOutputStream(FileReadWrite.EXCEL_OUTPUT_FILE);
 						HSSFWorkbook workbook = new HSSFWorkbook();
 						HSSFSheet worksheet1 = workbook.createSheet();
 						HSSFRow row1 = worksheet1.createRow(0);
@@ -133,7 +128,7 @@ public class Frame extends JFrame {
 								HSSFRow row = worksheet1.createRow(i + 1);
 								row.createCell(0).setCellValue(students.get(i).getFirstName());
 								row.createCell(1).setCellValue(students.get(i).getLastName());
-								int age = students.get(i).getAge();
+								int age = students.get(i).getAge(students.get(i).getDate());
 								row.createCell(2).setCellValue(age);
 							}
 						}
@@ -141,15 +136,11 @@ public class Frame extends JFrame {
 						fileOut.flush();
 						fileOut.close();
 					} else if (xmlButton.isSelected()) {
-						StudentList list = new StudentList();
-						list.setStudents(students);
-						XMLWriter.serialize(systemParameters.getOutputXMLFileName(), list);
+						for (Student st : students) {
+							XMLWriter.serialize(st);
+						}
 					}
-				} catch (JAXBException jex) {
-					System.out.println("Error saving XML file:");
-					jex.printStackTrace();
 				} catch (Exception e) {
-					System.out.println("System internal error");
 					e.printStackTrace();
 				}
 			}

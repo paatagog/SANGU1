@@ -1,4 +1,4 @@
-package Svanadze.swing;
+package lukino.swing;
 
 public class FileReadWrite {
 	public static String INPUT_FILE = "D:/JAVA/sources/Svanadze/swing/input.txt";
