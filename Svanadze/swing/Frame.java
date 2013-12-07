@@ -50,14 +50,10 @@ public class Frame extends JFrame {
 		getContentPane().add(panel);
 
 		panel.setLayout(null);
-
-		String excelString = "Excel";
-		String xmlString = "XML";
-		String textString = "Text Document";
 		
-		final AbstractButton excelButton = new JRadioButton(excelString);
-		final AbstractButton xmlButton = new JRadioButton(xmlString);
-		final AbstractButton textButton = new JRadioButton(textString);
+		final AbstractButton excelButton = new JRadioButton("Excel");
+		final AbstractButton xmlButton = new JRadioButton("XML");
+		final AbstractButton textButton = new JRadioButton("Text Document");
 
 		excelButton.setBounds(10,10,150,20);
 		xmlButton.setBounds(10,40,150,20);
