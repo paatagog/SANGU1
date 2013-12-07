@@ -5,11 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement
+@XmlRootElement(name="სტუდენტი")
+@XmlType(propOrder = {"firstName", "lastName", "age"})
 public class Student {
 	public static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -18,7 +20,8 @@ public class Student {
 	private String lastName;
 
 	private Date date;
-
+	
+	@XmlElement(name="სახელი")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -27,6 +30,7 @@ public class Student {
 		this.firstName = firstName;
 	}
 
+	@XmlElement(name="გვარი")
 	public String getLastName() {
 		return lastName;
 	}
@@ -35,12 +39,13 @@ public class Student {
 		this.lastName = lastName;
 	}
 
-	@XmlAttribute
+	@XmlTransient
 	public Date getDate() {
 		return date;
 	}
 
-	public int getAge(Date date) {
+	@XmlElement(name="ასაკი")
+	public int getAge() {
 		Calendar dob = Calendar.getInstance();
 		dob.setTime(date);
 		Calendar today = Calendar.getInstance();
@@ -59,7 +64,6 @@ public class Student {
 		this.date = sdf.parse(date);
 	}
 
-	@XmlElement
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("FirstName: ").append(firstName).append("; Lastname: ")

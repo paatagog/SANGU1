@@ -8,7 +8,7 @@ public class Test {
 			@Override
 			public void run() {
 				Frame ex = new Frame();
-				ex.setVisible(true);//
+				ex.setVisible(true);
 			}
 		});
 	}
