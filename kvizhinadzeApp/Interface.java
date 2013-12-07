@@ -54,6 +54,7 @@ public class Interface extends JFrame{
 									s.setDate(arr[2]);
 									students.add(s);
 								}
+							System.out.println("File Loaded");
 						} catch (Exception e){
 							e.printStackTrace();
 						}
@@ -77,6 +78,7 @@ public class Interface extends JFrame{
 					            printWriter.print(students.get(i).getDate() + ";");
 					            printWriter.println();
 				            }
+							System.out.println("File Saved");
 				            
 				        } catch (FileNotFoundException fileNotFoundException) {
 				            fileNotFoundException.printStackTrace();
