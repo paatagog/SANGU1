@@ -3,12 +3,11 @@ package Svanadze.swing;
 import java.io.File;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 public class XMLWriter {
 
-	public static void serialize(String fileName, StudentList students) throws JAXBException {
+	public static void serialize(String fileName, StudentList students) throws Exception {
 			File file = new File(fileName);
 			JAXBContext jaxbContext = JAXBContext.newInstance(StudentList.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();

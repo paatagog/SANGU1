@@ -1,14 +1,9 @@
 package Svanadze.swing;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +16,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.xml.bind.JAXBException;
-
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 @SuppressWarnings("serial")
 public class Frame extends JFrame {
@@ -48,13 +38,17 @@ public class Frame extends JFrame {
 
 		JPanel panel = new JPanel();
 		getContentPane().add(panel);
-
+		
 		panel.setLayout(null);
+		
+		final StatusBar statusBar = new StatusBar();
+		statusBar.setMessage("გახსენით ფაილი");
+		getContentPane().add(statusBar, BorderLayout.SOUTH);
 		
 		final AbstractButton excelButton = new JRadioButton("Excel");
 		final AbstractButton xmlButton = new JRadioButton("XML");
 		final AbstractButton textButton = new JRadioButton("Text Document");
-
+		
 		excelButton.setBounds(10,10,150,20);
 		xmlButton.setBounds(10,40,150,20);
 		textButton.setBounds(10,70,150,20);
@@ -67,7 +61,7 @@ public class Frame extends JFrame {
 
 		excelButton.setSelected(false);
 		xmlButton.setSelected(false);
-		textButton.setSelected(true);
+		textButton.setSelected(false);
 
 		btnGroup.add(excelButton);
 		btnGroup.add(xmlButton);
@@ -79,84 +73,56 @@ public class Frame extends JFrame {
 
 		JMenuBar menubar = new JMenuBar();
 
-		ImageIcon loadIcon = new ImageIcon(getClass().getResource("resources\\load.jpg"));
-		ImageIcon saveIcon = new ImageIcon(getClass().getResource("resources\\save.gif"));
+		ImageIcon loadIcon = new ImageIcon(getClass().getResource("resources\\open.png"));
+		ImageIcon saveIcon = new ImageIcon(getClass().getResource("resources\\save.png"));
 		ImageIcon exitIcon = new ImageIcon(getClass().getResource("resources\\exit.png"));
 
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
-		JMenuItem lMenuItem = new JMenuItem("Load", loadIcon);
-		JMenuItem sMenuItem = new JMenuItem("Save", saveIcon);
-		JMenuItem eMenuItem = new JMenuItem("Exit", exitIcon);
-
+		JMenuItem lMenuItem = new JMenuItem("გახსნა", loadIcon);
+		JMenuItem sMenuItem = new JMenuItem("შენახვა", saveIcon);
+		JMenuItem eMenuItem = new JMenuItem("გამოსვლა", exitIcon);
+		
 		lMenuItem.setMnemonic(KeyEvent.VK_L);
-		lMenuItem.setToolTipText("Load file");
+		lMenuItem.setToolTipText("ფაილის გახსნა");
 		lMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				try {
-					List<String> lines = Files.readAllLines(Paths.get(systemParameters.getInputFileName()),Charset.forName("UTF-8"));
-					for (String line : lines) {
-						String[] arr = line.split(" ");
-						Student s = new Student();
-						s.setFirstName(arr[0]);
-						s.setLastName(arr[1]);
-						s.setDate(arr[2]);
-						students.add(s);
-					}
+					students = FileRead.read(systemParameters.getInputFileName());
+					statusBar.setMessage("ფაილი გახსნილია");
 				} catch (Exception e) {
+					statusBar.setMessage("შეცდომა ფაილის გახსნისას!");
 					e.printStackTrace();
 				}
 			}
 		});
 
 		sMenuItem.setMnemonic(KeyEvent.VK_S);
-		sMenuItem.setToolTipText("Save file");
+		sMenuItem.setToolTipText("ფაილის შენახვა");
 		sMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				try {
 					if (textButton.isSelected()) {
-						PrintWriter out = new PrintWriter(new File(systemParameters.getOutputTextFileName()));
-						for (Student st : students) {
-							out.println(st.getFirstName() + " " + st.getLastName() + " " + st.getAge());
-						}
-						out.close();
+						TextDocumentWriter.writer(systemParameters.getOutputTextFileName(),students);
+						statusBar.setMessage("ფაილი შენახულია: " + systemParameters.getOutputTextFileName());
 					} else if (excelButton.isSelected()) {
-						FileOutputStream fileOut = new FileOutputStream(systemParameters.getOutputExcelFileName());
-						HSSFWorkbook workbook = new HSSFWorkbook();
-						HSSFSheet worksheet1 = workbook.createSheet();
-						HSSFRow row1 = worksheet1.createRow(0);
-						row1.createCell(0).setCellValue("First Name");
-						row1.createCell(1).setCellValue("Last Name");
-						row1.createCell(2).setCellValue("Age");
-						for (int j = 0; j < students.size(); j++) {
-							for (int i = 0; i < students.size(); i++) {
-								HSSFRow row = worksheet1.createRow(i + 1);
-								row.createCell(0).setCellValue(students.get(i).getFirstName());
-								row.createCell(1).setCellValue(students.get(i).getLastName());
-								int age = students.get(i).getAge();
-								row.createCell(2).setCellValue(age);
-							}
-						}
-						workbook.write(fileOut);
-						fileOut.flush();
-						fileOut.close();
+						ExcelWriter.writer(systemParameters.getOutputExcelFileName(), students);
+						statusBar.setMessage("ფაილი შენახულია: " + systemParameters.getOutputExcelFileName());
 					} else if (xmlButton.isSelected()) {
 						StudentList list = new StudentList();
 						list.setStudents(students);
 						XMLWriter.serialize(systemParameters.getOutputXMLFileName(), list);
+						statusBar.setMessage("ფაილი შენახულია: " + systemParameters.getOutputXMLFileName());
 					}
-				} catch (JAXBException jex) {
-					System.out.println("Error saving XML file:");
-					jex.printStackTrace();
-				} catch (Exception e) {
-					System.out.println("System internal error");
+				}catch (Exception e) {
+					statusBar.setMessage("შეცდომა ფაილის შენახვისას!");
 					e.printStackTrace();
 				}
 			}
 		});
 
 		eMenuItem.setMnemonic(KeyEvent.VK_E);
-		eMenuItem.setToolTipText("Exit application");
+		eMenuItem.setToolTipText("ფანჯრის დახურვა");
 		eMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				System.exit(0);
@@ -168,10 +134,10 @@ public class Frame extends JFrame {
 		file.add(eMenuItem);
 
 		menubar.add(file);
-		setJMenuBar(menubar);
-
-		setTitle("Frame");
-		setSize(300, 200);
+		setJMenuBar(menubar);		
+		
+		setTitle("Frame-ის მაგალითი");
+		setSize(400, 200);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 

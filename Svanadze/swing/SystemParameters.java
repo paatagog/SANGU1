@@ -2,10 +2,10 @@ package Svanadze.swing;
 
 public class SystemParameters {
 	
-	private static String INPUT_FILE = "c:/JAVA/sources/Svanadze/swing/input.txt";
-    private static String OUTPUT_FILE = "c:/JAVA/sources/Svanadze/swing/output.txt";
-    private static String EXCEL_OUTPUT_FILE = "c:/JAVA/sources/Svanadze/swing/output.xls";
-    private static final String FILE_NAME = "c:/JAVA/sources/Svanadze/swing/output.xml";
+	private static String INPUT_FILE = "D:/JAVA/sources/Svanadze/swing/input.txt";
+    private static String OUTPUT_FILE = "D:/JAVA/sources/Svanadze/swing/output.txt";
+    private static String EXCEL_OUTPUT_FILE = "D:/JAVA/sources/Svanadze/swing/output.xls";
+    private static final String FILE_NAME = "D:/JAVA/sources/Svanadze/swing/output.xml";
     
     public void loadSystemParameters() {
     	inputFileName = INPUT_FILE;
