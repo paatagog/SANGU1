@@ -1,0 +1,6 @@
+$ a = 7
+$ b = 15/06/1977
+$ date = 17/02/1989
+
+This is $date and $a
+shualeduri gamocdebi iqneba $date -dan 17 seqtembramde;
