@@ -3,7 +3,7 @@ package kvizhinadzeApp;
 
 import javax.swing.SwingUtilities;
 
-public class MyFrameOpener {
+public class myFrameOpener {
 	public static void main (String[] args){
 		SwingUtilities.invokeLater(new Runnable(){
 			@Override
