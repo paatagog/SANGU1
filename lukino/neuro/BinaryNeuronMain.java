@@ -11,6 +11,7 @@ public class BinaryNeuronMain {
 		BinaryNeuron binaryNeuron = new BinaryNeuron();
 		List<Integer> x = new ArrayList<Integer>();
 		List<Double> w = new ArrayList<Double>();
+		
 		w.add(1.0);
 		w.add(2.5);
 		w.add(1.0);
@@ -28,7 +29,9 @@ public class BinaryNeuronMain {
 		binaryNeuron.setTheta(200);
 		
 		int binaryNeuronSign = binaryNeuron.GetSign();
-		System.out.println(binaryNeuron.GetSign());
+		System.out.println(binaryNeuronSign);
+		
+		
 	}
 
 }

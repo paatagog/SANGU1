@@ -8,6 +8,8 @@ public class BinaryNeuron {
 	public List<Integer> X;
 	public double Theta;
 	
+	public List<Double> QList;
+	
 	public int GetSign (){
 		double sum = 0;
 		for (int i = 0; i < W.size(); i++){
@@ -16,7 +18,7 @@ public class BinaryNeuron {
 		sum -= Theta;
  		return sum<0 ? -1 : 1 ;
 	}
-
+	
 	public List<Double> getW() {
 		return W;
 	}
@@ -39,5 +41,13 @@ public class BinaryNeuron {
 
 	public void setTheta(double theta) {
 		Theta = theta;
+	}
+
+	public List<Double> getQList() {
+		return QList;
+	}
+
+	public void setQList(List<Double> qList) {
+		QList = qList;
 	}
 }
