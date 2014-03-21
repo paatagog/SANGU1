@@ -2,7 +2,7 @@ package lukino.neuro;
 
 import java.util.List;
 
-public class BinaryNeiron {
+public class BinaryNeuron {
 
 	public List<Double> W;
 	public List<Integer> X;

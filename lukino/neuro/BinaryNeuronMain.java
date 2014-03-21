@@ -8,7 +8,7 @@ public class BinaryNeuronMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		BinaryNeiron binaryNeiron = new BinaryNeiron();
+		BinaryNeuron binaryNeuron = new BinaryNeuron();
 		List<Integer> x = new ArrayList<Integer>();
 		List<Double> w = new ArrayList<Double>();
 		w.add(1.0);
@@ -23,11 +23,12 @@ public class BinaryNeuronMain {
 		x.add(1);
 		x.add(1);
 		
-		binaryNeiron.setX(x);
-		binaryNeiron.setW(w);
-		binaryNeiron.setTheta(200);
+		binaryNeuron.setX(x);
+		binaryNeuron.setW(w);
+		binaryNeuron.setTheta(200);
 		
-		System.out.println(binaryNeiron.GetSign());
+		int binaryNeuronSign = binaryNeuron.GetSign();
+		System.out.println(binaryNeuron.GetSign());
 	}
 
 }
