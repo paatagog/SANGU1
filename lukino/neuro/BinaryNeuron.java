@@ -8,7 +8,9 @@ public class BinaryNeuron {
 	public List<Integer> X;
 	public double Theta;
 	
+	public List<Double> MiuList;
 	public List<Double> QList;
+	public List<Double> Q1List;
 	
 	public int GetSign (){
 		double sum = 0;
@@ -19,6 +21,44 @@ public class BinaryNeuron {
  		return sum<0 ? -1 : 1 ;
 	}
 	
+	public void InitializeQ1ListAndMiuList(int n, List<Double> qList, List<Double> wList) {
+		double qForMult = 1;
+		double miuForSub = 0;
+		
+		BinaryCounter bc = new BinaryCounter();
+		bc.setN(4);
+
+		for (int i = 0; i < Math.pow(2, bc.getN()); i++){
+			for (int j = 0; j < bc.binary.size(); j++){
+				if(bc.binary.get(j) == 0){
+					miuForSub -= wList.get(j);
+					qForMult *= qList.get(j); 
+				}
+				else {
+					miuForSub += wList.get(j);
+					qForMult *= (1 - qList.get(j));
+				}
+			}
+			
+			Q1List.add(qForMult);
+			MiuList.add(miuForSub);
+		}
+		
+	}
+	
+	public double MistakeProbability (List<Double> q1List){
+		double mistakeProbability = 0;
+		
+		for (int i = 0; i < q1List.size(); i++){
+			mistakeProbability += q1List.get(i);
+		}
+		
+		return mistakeProbability;
+	}
+	
+		
+	
+	// Set / Get  -------------------------------------------
 	public List<Double> getW() {
 		return W;
 	}
