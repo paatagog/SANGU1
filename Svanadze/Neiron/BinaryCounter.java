@@ -13,14 +13,14 @@ public class BinaryCounter {
 		}
 	}
 	
-	public List<Integer> GetNext(){
-		for(int i = binary.size() - 1; i > 0; i--)
-		{
-			if(binary.get(i) + 1 == n){
+	//public List<Integer> GetNext(){
+		//for(int i = binary.size() - 1; i > 0; i--)
+		//{
+			//if(binary.get(i) + 1 == n){
 				
-			}
-		}
-	}
+			//}
+		//}
+	//}
 	
 	public int getN() {
 		return n;
