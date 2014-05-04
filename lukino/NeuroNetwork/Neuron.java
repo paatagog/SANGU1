@@ -37,6 +37,7 @@ public class Neuron {
 	public void setW(List<Double> w) {
 		this.w = w;
 	}
+	
 	public List<Double> getX() {
 		return x;
 	}
