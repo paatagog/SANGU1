@@ -34,7 +34,11 @@ public class NeuronMain {
 	
 	
 	public static void main(String[] args) {
-		//double random = Math.random() * 5 + 1;
+		List<List<Neuron>> list = new ArrayList<List<Neuron>>();
+		//for()
+		//list.get(0).get(0).
+		
+			//double random = Math.random() * 5 + 1;
 
 	}
 
