@@ -1,6 +1,5 @@
 package lukino.NeuroNetwork;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Neuron {
@@ -20,10 +19,18 @@ public class Neuron {
 	}
 	
 	public double fi(double a){
-		return (1/(1+(Math.exp(a))));
+		return (1/(1+(Math.exp(-a))));
 	}
 	
+	public double fiDerivative(double a){
+		double expA = Math.exp(a);
+		return (expA / ((1-expA) * (1-expA)));
+	}
 	
+	public double e(){
+		return (d-y);
+	}
+		
 	//--------------------------------
 	public double getD() {
 		return d;
@@ -37,7 +44,6 @@ public class Neuron {
 	public void setW(List<Double> w) {
 		this.w = w;
 	}
-	
 	public List<Double> getX() {
 		return x;
 	}
