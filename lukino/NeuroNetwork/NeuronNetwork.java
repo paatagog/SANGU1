@@ -39,12 +39,33 @@ public class NeuronNetwork {
 		
 	}
 	
-/*	public void deltaW(){
-		double y = layerList.get(1).calculateY();
-		double delta = delta(layerList);
+	public void deltaW(){
+		delta();
+		
+		for (int i = layers.size()-1; i >= 0; i--){
+			List<Double> deltaWs = new ArrayList<Double>();
+			for (int j = 0; j < layers.get(i).size(); j++){
+				if (i != 0){
+					double prevNeironY = layers.get(i-1).get(j).calculateY();
+					double delta = deltas.get(i).get(j);
+					double deltaW = miu * delta * prevNeironY;
+					
+					deltaWs.add(deltaW);
+				}
+				else{
+					double x = layers.get(i).get(j).x.get(i);
+					double delta = deltas.get(i).get(j);
+					double deltaW = miu * delta * x;
+					
+					deltaWs.add(deltaW);
+				}
+			}
+			ws.add(i, deltaWs);
+			deltaWs.clear();
+		}
 		
 		
-	}*/
+	}
 
 
 }
