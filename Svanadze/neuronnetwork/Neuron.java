@@ -1,6 +1,5 @@
 package Svanadze.neuronnetwork;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Neuron {
@@ -10,35 +9,33 @@ public class Neuron {
 	private double d;
 	
 	public double calculateY() {
-		for(double b : this.x){
-			y = f(sum());
-		}
-		return y;
-	}
-	
-	public double f(double a){
-		return 1/(1+Math.exp(a));
-	}
-	
-	public double sum(){
 		double sum = 0;
 		for(int i = 0; i < w.size(); i++){
 			sum += x.get(i) * w.get(i);
 		}
-		return sum;
+		y = fi(sum);		
+		return y;
+	}
+		
+	public static double fi(double a){
+		return 1/(1+Math.exp(a));
+	}
+	
+	public static double fiDerivative(double a){
+		return fi(a)*(1-fi(a));
 	}
 	
 	public List<Double> getW() {
 		return w;
 	}
 	public void setW(List<Double> w) {
-		w = w;
+		this.w = w;
 	}
 	public List<Double> getX() {
 		return x;
 	}
 	public void setX(List<Double> x) {
-		x = x;
+		this.x = x;
 	}
 	public double getD() {
 		return d;
