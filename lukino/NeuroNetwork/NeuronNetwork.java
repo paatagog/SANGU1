@@ -5,67 +5,94 @@ import java.util.List;
 
 public class NeuronNetwork {
 
-	List<List<Neuron>> layers = new ArrayList<List<Neuron>>();
-	List<List<Double>> deltas = new ArrayList<List<Double>>();
-	List<List<Double>> ws = new ArrayList<List<Double>>();
+	//Mtliani neironuli qseli
+	public List<List<Neuron>> layers = new ArrayList<List<Neuron>>();
 	
-	double miu = 0.5;
+	//delta koeficientebis listi
+	private List<List<Double>> deltas = new ArrayList<List<Double>>();
 	
-	public void delta(){
+	private double miu = 0.5;
+	
+	//deltebis gamotvla
+	private void delta(){
+		Neuron neuron;
+		
 		for (int i = layers.size()-1; i >= 0; i--){
-			List<Double> layerDeltas = new ArrayList<Double>();
+			//Davdivart Shreebze bolodan
+			List<Double> layerDeltas = new ArrayList<Double>(); //satitao shristvis 
+			
 			for (int j = 0; j < layers.get(i).size(); j++){
+				//davdivart i shris neironebze 
 				if (i == layers.size()-1){
-					Neuron neuron = layers.get(i).get(j);
+					//bolo shristvis deltebis gamotvla da layerDeltas-shi chayra
+					neuron = layers.get(i).get(j);
 					double delta = neuron.e() * neuron.fiDerivative(neuron.calculateY()); 
 					layerDeltas.add(j, delta);
 				}
 				else{
-					Neuron neuron = layers.get(i).get(j);
+					//deltebis gamotvla sxva danarcheni shreebistvis
+					neuron = layers.get(i).get(j);
 					double delta = 0;
 					
 					for(int k = 0; k < layers.get(i+1).size(); k++){
+						//jami shedegi neironebis w-ebis da deltebis namravlebis
 						Neuron nextNeuron = layers.get(i+1).get(k);
-						delta = deltas.get(i+1).get(k) * nextNeuron.w.get(j); 
+						delta += deltas.get(i+1).get(k) * nextNeuron.w.get(j); 
 					}
 					
-					delta = neuron.fiDerivative(neuron.calculateY()); 
-					layerDeltas.add(j, delta);					
+					//jami mravldeba fi-s warmoebulze
+					delta *= neuron.fiDerivative(neuron.calculateY());
+					//delta vardeba layerDeltas listshi 
+					layerDeltas.add(j, delta);
 				}
 			}
+			//konkretuli i-uri shris deltebis gadayra deltas listshi da layerDeltas listis gasuftaveba
 			deltas.add(i, layerDeltas);
 			layerDeltas.clear();
 		}
-		
 	}
 	
+	//deltebis nazrdebis gamotvla da konkretuli neironistvis axali w-s dayeneba
 	public void deltaW(){
 		delta();
 		
+		Neuron neuron;
 		for (int i = layers.size()-1; i >= 0; i--){
-			List<Double> deltaWs = new ArrayList<Double>();
+			//davdivart shreebze bolodan
+			List<Double> previousYList = new ArrayList<Double>();
+			
+			//optimizaciistvis wina shris yebis listshi chayra, roms satitao neironistvis erti da igive ar xdebodes 
+			if(i != 0)
+				for(int p = 0; p < layers.get(i-1).size(); p++)
+					previousYList.add(p, layers.get(i-1).get(p).calculateY());
+			
 			for (int j = 0; j < layers.get(i).size(); j++){
+				//shris neironebze chamovla
+				neuron = layers.get(i).get(j);
+				
 				if (i != 0){
-					double prevNeironY = layers.get(i-1).get(j).calculateY();
-					double delta = deltas.get(i).get(j);
-					double deltaW = miu * delta * prevNeironY;
-					
-					deltaWs.add(deltaW);
+					//konkretuli j neironis wonebze chamovla da axali wonis dayeneba
+					for (int k = 0; k < neuron.w.size(); k++){
+						double delta = deltas.get(i).get(j);
+						double deltaW = miu * delta * previousYList.get(k);
+						
+						neuron.w.set(k, neuron.w.get(k) + deltaW);
+					}
 				}
 				else{
-					double x = layers.get(i).get(j).x.get(i);
-					double delta = deltas.get(i).get(j);
-					double deltaW = miu * delta * x;
-					
-					deltaWs.add(deltaW);
+					//konkretuli j neironis wonebze chamovla da axali wonis dayeneba
+					for (int k = 0; k < neuron.w.size(); k++){
+						double x = layers.get(i).get(j).x.get(i);
+						double delta = deltas.get(i).get(j);
+						double deltaW = miu * delta * x;
+						
+						neuron.w.set(k, neuron.w.get(k) + deltaW);
+					}
 				}
 			}
-			ws.add(i, deltaWs);
-			deltaWs.clear();
+			
+			previousYList.clear();
 		}
-		
-		
 	}
-
 
 }
