@@ -178,7 +178,7 @@ public class NeuronNetwork {
 			for(int k = 0; k < layers.get(i-1).size(); k++)
 				yList.add(layers.get(i-1).get(k).calculateY());
 			
-			for(int j = 0; j < 5; j++){
+			for(int j = 0; j < layers.get(i).size(); j++){
 				neuron = new Neuron();									// --------------------  es chirdeba???
 				neuron = layers.get(i).get(j);
 				neuron.setX(yList);
@@ -213,9 +213,9 @@ public class NeuronNetwork {
 		PrintNeuron();
 		
 		for(int i =0 ; i< 5; i++){
-		//Start Calculating New Weights
-		CalculateDeltas();
-		CalculateDeltaW();
+			//Start Calculating New Weights
+			CalculateDeltas();
+			CalculateDeltaW();
 		}
 		PrintNeuron();
 	}
