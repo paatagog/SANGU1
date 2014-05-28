@@ -12,10 +12,11 @@ public class Neuron {
 	public double calculateY(){
 		double sum = 0;
 		for(int i=0; i<x.size();i++){
-			sum = x.get(i) * w.get(i);
+			sum += x.get(i) * w.get(i);
 		}
 		
-		return fi(sum);
+		y = fi(sum);
+		return y;
 	}
 	
 	public double fi(double a){

@@ -11,15 +11,58 @@ public class NeuronNetwork {
 	//delta koeficientebis listi
 	private List<List<Double>> deltas = new ArrayList<List<Double>>();
 	
+	//The answers which we want to get 
+	private List<Double> d = new ArrayList<Double>();
+	
 	private double miu = 0.5;
 	
-	//deltebis gamotvla
-	private void delta(){
+	//set d list 
+	private void setD(List<Double> d) {
+		this.d = d;
+		
 		Neuron neuron;
+		for(int i = 0; i < layers.size(); i++){
+			for(int j = 0; j < layers.get(i).size(); j++){
+				neuron = new Neuron(); 							//------------ es chirdeba??
+				neuron = layers.get(i).get(j);
+				neuron.d = d.get(j);
+			}
+		}
+	}
+
+	//Calculate Random Numbers And Set To Neuron
+	private void SetRandomW(){
+		List<Double> wList;
+		Neuron neuron;
+		for (int i = 0; i < layers.size(); i++){
+			for (int j = 0; j < layers.get(i).size(); j++){
+				neuron = new Neuron(); 							//------------ es chirdeba??
+				neuron = layers.get(i).get(j);
+				wList = new ArrayList<Double>();
+				if(i == 0){
+					for (int k = 0; k < layers.get(i).size(); k++){
+						wList.add(Math.random());
+					}
+				}
+				else{
+					for (int k = 0; k < layers.get(i-1).size(); k++){
+						wList.add(Math.random());
+					}
+				}
+				
+				neuron.setW(wList);
+			}
+		}
+	} 
+	
+	//deltebis gamotvla
+	private void CalculateDeltas(){
+		Neuron neuron;
+		List<Double> layerDeltas;
 		
 		for (int i = layers.size()-1; i >= 0; i--){
 			//Davdivart Shreebze bolodan
-			List<Double> layerDeltas = new ArrayList<Double>(); //satitao shristvis 
+			layerDeltas = new ArrayList<Double>(); //satitao shristvis 
 			
 			for (int j = 0; j < layers.get(i).size(); j++){
 				//davdivart i shris neironebze 
@@ -34,7 +77,7 @@ public class NeuronNetwork {
 					neuron = layers.get(i).get(j);
 					double delta = 0;
 					
-					for(int k = 0; k < layers.get(i+1).size(); k++){
+					for(int k = 0; k < layers.get(i).get(j).w.size(); k++){
 						//jami shedegi neironebis w-ebis da deltebis namravlebis
 						Neuron nextNeuron = layers.get(i+1).get(k);
 						delta += deltas.get(i+1).get(k) * nextNeuron.w.get(j); 
@@ -48,18 +91,18 @@ public class NeuronNetwork {
 			}
 			//konkretuli i-uri shris deltebis gadayra deltas listshi da layerDeltas listis gasuftaveba
 			deltas.add(i, layerDeltas);
-			layerDeltas.clear();
+
 		}
 	}
 	
 	//deltebis nazrdebis gamotvla da konkretuli neironistvis axali w-s dayeneba
-	public void deltaW(){
-		delta();
-		
+	private void CalculateDeltaW(){
 		Neuron neuron;
+		List<Double> previousYList;
+		
 		for (int i = layers.size()-1; i >= 0; i--){
 			//davdivart shreebze bolodan
-			List<Double> previousYList = new ArrayList<Double>();
+			previousYList = new ArrayList<Double>();
 			
 			//optimizaciistvis wina shris yebis listshi chayra, roms satitao neironistvis erti da igive ar xdebodes 
 			if(i != 0)
@@ -91,8 +134,90 @@ public class NeuronNetwork {
 				}
 			}
 			
-			previousYList.clear();
 		}
 	}
 
+	//initialize Empty Network
+	public void InitilializeNetwork(List<Integer> config){
+		Neuron neuron;
+		List<Neuron> neuronList;
+		List<Double> layerDeltas;
+		
+		for (int i = 0; i < config.size(); i++){
+			neuronList = new ArrayList<Neuron>();
+			layerDeltas = new ArrayList<Double>();
+			
+			for (int j = 0; j < config.get(i); j++){
+				neuron = new Neuron();
+				neuronList.add(neuron);
+				layerDeltas.add(0.0);
+			}
+			layers.add(neuronList);
+			deltas.add(layerDeltas);
+		}
+		
+		//Fill Network With Random Ws
+		SetRandomW();
+	}
+
+	private void ApplyX(List<Double> x){
+		Neuron neuron;
+		
+		//pirveli shris neironebis inicializacia
+		for(int j = 0; j < layers.get(0).size(); j++){
+			neuron = new Neuron();									// --------------------  es chirdeba???
+			neuron = layers.get(0).get(j);
+			neuron.setX(x);
+		}
+		
+
+		//danarcheni shreebis neironebis inicializacia
+		for(int i = 1; i < layers.size(); i++){
+			//inicializacia, optimizaciistvis
+			List<Double> yList = new ArrayList<Double>();
+			for(int k = 0; k < layers.get(i-1).size(); k++)
+				yList.add(layers.get(i-1).get(k).calculateY());
+			
+			for(int j = 0; j < 5; j++){
+				neuron = new Neuron();									// --------------------  es chirdeba???
+				neuron = layers.get(i).get(j);
+				neuron.setX(yList);
+				
+				if (i == layers.size()-1){
+					layers.get(i).get(j).calculateY();
+				}
+
+			}			
+		}
+	}
+	
+	private void PrintNeuron(){
+		int lastLayerNumber = layers.size() - 1;
+
+		for(int j = 0; j < layers.get(lastLayerNumber).size(); j++){
+			Neuron neuronlast = layers.get(lastLayerNumber).get(j);
+			System.out.println("d");
+			System.out.println(neuronlast.d);
+			System.out.println("y");
+			System.out.println(neuronlast.calculateY());
+		}
+		System.out.println("--------------------------------------------");
+	}
+	
+	//Learn
+	public void LearnNetwork(List<Double> x, List<Double> d){
+		//Fill Network With Parameters
+		setD(d);
+		ApplyX(x);
+		
+		PrintNeuron();
+		
+		for(int i =0 ; i< 5; i++){
+		//Start Calculating New Weights
+		CalculateDeltas();
+		CalculateDeltaW();
+		}
+		PrintNeuron();
+	}
+	
 }
