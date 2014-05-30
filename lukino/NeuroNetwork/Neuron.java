@@ -5,7 +5,6 @@ import java.util.List;
 public class Neuron {
 
 	public double y;
-	public double d;
 	public List<Double> w;
 	public List<Double> x;
 	
@@ -27,18 +26,8 @@ public class Neuron {
 		double expA = Math.exp(a);
 		return (expA / ((1-expA) * (1-expA)));
 	}
-	
-	public double e(){
-		return (d-y);
-	}
 		
 	//--------------------------------
-	public double getD() {
-		return d;
-	}
-	public void setD(double d) {
-		this.d = d;
-	}
 	public List<Double> getW() {
 		return w;
 	}

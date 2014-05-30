@@ -1,5 +1,6 @@
 package lukino.NeuroNetwork;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +20,6 @@ public class NeuronNetwork {
 	//set d list 
 	private void setD(List<Double> d) {
 		this.d = d;
-		
-		Neuron neuron;
-		for(int i = 0; i < layers.size(); i++){
-			for(int j = 0; j < layers.get(i).size(); j++){
-				neuron = new Neuron(); 							//------------ es chirdeba??
-				neuron = layers.get(i).get(j);
-				neuron.d = d.get(j);
-			}
-		}
 	}
 
 	//Calculate Random Numbers And Set To Neuron
@@ -36,7 +28,6 @@ public class NeuronNetwork {
 		Neuron neuron;
 		for (int i = 0; i < layers.size(); i++){
 			for (int j = 0; j < layers.get(i).size(); j++){
-				neuron = new Neuron(); 							//------------ es chirdeba??
 				neuron = layers.get(i).get(j);
 				wList = new ArrayList<Double>();
 				if(i == 0){
@@ -69,7 +60,7 @@ public class NeuronNetwork {
 				if (i == layers.size()-1){
 					//bolo shristvis deltebis gamotvla da layerDeltas-shi chayra
 					neuron = layers.get(i).get(j);
-					double delta = neuron.e() * neuron.fiDerivative(neuron.calculateY()); 
+					double delta = (d.get(j) - neuron.y) * neuron.fiDerivative(neuron.calculateY()); 
 					layerDeltas.add(j, delta);
 				}
 				else{
@@ -165,7 +156,6 @@ public class NeuronNetwork {
 		
 		//pirveli shris neironebis inicializacia
 		for(int j = 0; j < layers.get(0).size(); j++){
-			neuron = new Neuron();									// --------------------  es chirdeba???
 			neuron = layers.get(0).get(j);
 			neuron.setX(x);
 		}
@@ -179,7 +169,6 @@ public class NeuronNetwork {
 				yList.add(layers.get(i-1).get(k).calculateY());
 			
 			for(int j = 0; j < layers.get(i).size(); j++){
-				neuron = new Neuron();									// --------------------  es chirdeba???
 				neuron = layers.get(i).get(j);
 				neuron.setX(yList);
 				
@@ -194,12 +183,12 @@ public class NeuronNetwork {
 	private void PrintNeuron(){
 		int lastLayerNumber = layers.size() - 1;
 
+		DecimalFormat df = new DecimalFormat("#.####");
+		
 		for(int j = 0; j < layers.get(lastLayerNumber).size(); j++){
 			Neuron neuronlast = layers.get(lastLayerNumber).get(j);
-			System.out.println("d");
-			System.out.println(neuronlast.d);
-			System.out.println("y");
-			System.out.println(neuronlast.calculateY());
+			System.out.println("d = " + d.get(j));
+			System.out.println("y = " + df.format(neuronlast.calculateY()));
 		}
 		System.out.println("--------------------------------------------");
 	}
@@ -212,7 +201,7 @@ public class NeuronNetwork {
 		
 		PrintNeuron();
 		
-		for(int i =0 ; i< 5; i++){
+		for(int i =0 ; i< 1; i++){
 			//Start Calculating New Weights
 			CalculateDeltas();
 			CalculateDeltaW();

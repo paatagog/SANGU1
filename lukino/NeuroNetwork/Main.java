@@ -17,7 +17,9 @@ public class Main {
 		
 		neuNet.InitilializeNetwork(config);
 		
-		neuNet.LearnNetwork(xlist, dlist);
+		for (int i = 0; i < 100; i++) {
+			neuNet.LearnNetwork(xlist, dlist);
+		}
 		
 		
 	}
