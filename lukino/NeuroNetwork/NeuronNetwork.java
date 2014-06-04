@@ -1,8 +1,8 @@
 package lukino.NeuroNetwork;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.DecimalFormat;
 
 public class NeuronNetwork {
 
@@ -182,7 +182,6 @@ public class NeuronNetwork {
 	
 	private void PrintNeuron(){
 		int lastLayerNumber = layers.size() - 1;
-
 		DecimalFormat df = new DecimalFormat("#.####");
 		
 		for(int j = 0; j < layers.get(lastLayerNumber).size(); j++){
@@ -201,7 +200,7 @@ public class NeuronNetwork {
 		
 		PrintNeuron();
 		
-		for(int i =0 ; i< 1; i++){
+		for(int i =0 ; i < 1; i++){
 			//Start Calculating New Weights
 			CalculateDeltas();
 			CalculateDeltaW();

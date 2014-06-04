@@ -26,7 +26,7 @@ public class Neuron {
 		double expA = Math.exp(a);
 		return (expA / ((1-expA) * (1-expA)));
 	}
-		
+	
 	//--------------------------------
 	public List<Double> getW() {
 		return w;
