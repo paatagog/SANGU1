@@ -60,7 +60,7 @@ public class NeuronNetwork {
 				if (i == layers.size()-1){
 					//bolo shristvis deltebis gamotvla da layerDeltas-shi chayra
 					neuron = layers.get(i).get(j);
-					double delta = (d.get(j) - neuron.y) * neuron.fiDerivative(neuron.calculateY()); 
+					double delta = (d.get(j) - neuron.y) * neuron.fiDerivative(neuron.y); 
 					layerDeltas.add(j, delta);
 				}
 				else{
@@ -81,7 +81,7 @@ public class NeuronNetwork {
 				}
 			}
 			//konkretuli i-uri shris deltebis gadayra deltas listshi da layerDeltas listis gasuftaveba
-			deltas.add(i, layerDeltas);
+			deltas.set(i, layerDeltas);
 
 		}
 	}
@@ -98,7 +98,7 @@ public class NeuronNetwork {
 			//optimizaciistvis wina shris yebis listshi chayra, roms satitao neironistvis erti da igive ar xdebodes 
 			if(i != 0)
 				for(int p = 0; p < layers.get(i-1).size(); p++)
-					previousYList.add(p, layers.get(i-1).get(p).calculateY());
+					previousYList.add(p, layers.get(i-1).get(p).y);
 			
 			for (int j = 0; j < layers.get(i).size(); j++){
 				//shris neironebze chamovla
@@ -131,6 +131,7 @@ public class NeuronNetwork {
 	//initialize Empty Network
 	public void InitilializeNetwork(List<Integer> config){
 		Neuron neuron;
+		Double doubl;
 		List<Neuron> neuronList;
 		List<Double> layerDeltas;
 		
@@ -140,8 +141,9 @@ public class NeuronNetwork {
 			
 			for (int j = 0; j < config.get(i); j++){
 				neuron = new Neuron();
+				doubl = new Double(0);
 				neuronList.add(neuron);
-				layerDeltas.add(0.0);
+				layerDeltas.add(doubl);
 			}
 			layers.add(neuronList);
 			deltas.add(layerDeltas);
