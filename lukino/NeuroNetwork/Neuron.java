@@ -23,8 +23,8 @@ public class Neuron {
 	}
 	
 	public double fiDerivative(double a){
-		double expA = Math.exp(a);
-		return (expA / ((1-expA) * (1-expA)));
+		double f = fi(a);
+		return (f / (1-f));
 	}
 	
 	//--------------------------------

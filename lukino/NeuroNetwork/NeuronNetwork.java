@@ -15,7 +15,7 @@ public class NeuronNetwork {
 	//The answers which we want to get 
 	private List<Double> d = new ArrayList<Double>();
 	
-	private double miu = 0.5;
+	private double miu = 0.1;
 	
 	//set d list 
 	private void setD(List<Double> d) {
@@ -62,8 +62,7 @@ public class NeuronNetwork {
 					neuron = layers.get(i).get(j);
 					double delta = (d.get(j) - neuron.y) * neuron.fiDerivative(neuron.y); 
 					layerDeltas.add(j, delta);
-				}
-				else{
+				} else {
 					//deltebis gamotvla sxva danarcheni shreebistvis
 					neuron = layers.get(i).get(j);
 					double delta = 0;
@@ -116,7 +115,7 @@ public class NeuronNetwork {
 				else{
 					//konkretuli j neironis wonebze chamovla da axali wonis dayeneba
 					for (int k = 0; k < neuron.w.size(); k++){
-						double x = layers.get(i).get(j).x.get(i);
+						double x = layers.get(i).get(j).x.get(k);
 						double delta = deltas.get(i).get(j);
 						double deltaW = miu * delta * x;
 						
@@ -184,7 +183,7 @@ public class NeuronNetwork {
 	
 	private void PrintNeuron(){
 		int lastLayerNumber = layers.size() - 1;
-		DecimalFormat df = new DecimalFormat("#.####");
+		DecimalFormat df = new DecimalFormat("#.######");
 		
 		for(int j = 0; j < layers.get(lastLayerNumber).size(); j++){
 			Neuron neuronlast = layers.get(lastLayerNumber).get(j);
@@ -200,7 +199,7 @@ public class NeuronNetwork {
 		setD(d);
 		ApplyX(x);
 		
-		PrintNeuron();
+		//PrintNeuron();
 		
 		for(int i =0 ; i < 1; i++){
 			//Start Calculating New Weights
