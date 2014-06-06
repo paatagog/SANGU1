@@ -1,29 +1,18 @@
 package Svanadze.neuronnetwork;
 
+import java.util.List;
+
 public class NeuronNetwork {
-	public Neuron neuron = new Neuron();
+	public List<Double> x;
+	public List<Double> y;
+	public List<Double> w;
+	public List<Double> d;
+	 	
+	public void Learn(List<Double> x, List<Double> d){
 		
-	public double sum(){
-		double sum = 0;
-		for(int i = 0; i < neuron.getW().size(); i++){
-			sum += neuron.getX().get(i) * neuron.getW().get(i);
-		}
-		return sum;
 	}
 	
-	public double delta(){
-		double e = neuron.getD() - neuron.calculateY();
-		double s = sum();
-		return e * Neuron.fiDerivative(s);
-	}
-	
-	public double deltaWithW(){
-		double delta = delta();
-		double s = sum();
-		double sum = 0;
-		for(double k : neuron.getW()){
-			sum += delta * k;
-		}
-		return Neuron.fiDerivative(s) * sum;
+	public NeuronNetwork(List<Integer> networkConfig){
+		
 	}
 }
