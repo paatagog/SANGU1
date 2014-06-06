@@ -8,7 +8,15 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		List<Double> dlist = new ArrayList<Double>(Arrays.asList((double)0.2, (double)0.4, (double)0.8, (double)0.7, (double)0.2));
+		//String s = "0.2 0.5;";
+		List<Double> dlist = new ArrayList<Double>(Arrays.asList(
+				(double)0.2, (double)0.2, (double)0.8, (double)0.2, (double)0.2, 
+				(double)0.2, (double)0.2, (double)0.8, (double)0.2, (double)0.2, 
+				(double)0.2, (double)0.2, (double)0.8, (double)0.2, (double)0.2,
+				(double)0.2, (double)0.2, (double)0.8, (double)0.2, (double)0.2,
+				(double)0.2, (double)0.2, (double)0.8, (double)0.2, (double)0.2)
+				);
+		
 		List<Double> xlist = new ArrayList<Double>(Arrays.asList((double)0.5, (double)0.3, (double)0.1, (double)0.8, (double)0.6));
 		
 		List<Double> d1list = new ArrayList<Double>(Arrays.asList((double)0.3, (double)0.2, (double)0.5, (double)0.4, (double)0.7));
