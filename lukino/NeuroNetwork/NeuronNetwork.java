@@ -2,6 +2,7 @@ package lukino.NeuroNetwork;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.text.DecimalFormat;
 
 public class NeuronNetwork {
@@ -184,17 +185,22 @@ public class NeuronNetwork {
 	private void PrintNeuron(){
 		int lastLayerNumber = layers.size() - 1;
 		DecimalFormat df = new DecimalFormat("#.######");
-		
-		for(int j = 0; j < layers.get(lastLayerNumber).size(); j++){
-			Neuron neuronlast = layers.get(lastLayerNumber).get(j);
-			System.out.println("d = " + d.get(j));
-			System.out.println("y = " + df.format(neuronlast.calculateY()));
-		}
+
+//		for(int j = 0; j < layers.get(lastLayerNumber).size(); j++){
+//			Neuron neuronlast = layers.get(lastLayerNumber).get(j);
+//			System.out.println("d = " + d.get(j));
+//			System.out.println("y = " + df.format(neuronlast.calculateY()));
+//		}
+	
+		Neuron neuronlast = layers.get(lastLayerNumber).get(0);
+		System.out.println("d = " + d.get(0));
+		System.out.println("y = " + df.format(neuronlast.calculateY()));
+	
 		System.out.println("--------------------------------------------");
 	}
 	
 	//Learn
-	public void LearnNetwork(List<Double> x, List<Double> d){
+	public void LearnNetwork(List<Double> x, List<Double> d, boolean print){
 		//Fill Network With Parameters
 		setD(d);
 		ApplyX(x);
@@ -206,7 +212,9 @@ public class NeuronNetwork {
 			CalculateDeltas();
 			CalculateDeltaW();
 		}
-		PrintNeuron();
+		if (print){
+			PrintNeuron();
+		}
 	}
 	
 }
