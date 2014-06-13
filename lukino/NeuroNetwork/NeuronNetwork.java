@@ -152,7 +152,7 @@ public class NeuronNetwork {
 		//SetRandomW();
 	}
 
-	private void ApplyX(List<Double> x){
+	public void ApplyX(List<Double> x){
 		Neuron neuron;
 		
 		//pirveli shris neironebis inicializacia
@@ -181,7 +181,7 @@ public class NeuronNetwork {
 		}
 	}
 	
-	private void PrintNeuron(){
+	public void PrintNeuron(){
 		int lastLayerNumber = layers.size() - 1;
 		DecimalFormat df = new DecimalFormat("#.######");
 

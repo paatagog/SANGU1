@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.sun.org.apache.xml.internal.security.utils.ElementCheckerImpl.FullChecker;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -91,6 +89,14 @@ public class Main {
 				(double)0.4, (double)0.4, (double)0.4, (double)0.4, (double)0.4
 				));
 		
+		List<Double> xlist5 = new ArrayList<Double>(Arrays.asList(
+				(double)0.8, (double)0.2, (double)0.2, (double)0.2, (double)0.2, 
+				(double)0.2, (double)0.8, (double)0.2, (double)0.2, (double)0.2, 
+				(double)0.2, (double)0.2, (double)0.8, (double)0.2, (double)0.2,
+				(double)0.2, (double)0.2, (double)0.8, (double)0.2, (double)0.2,
+				(double)0.2, (double)0.2, (double)0.8, (double)0.2, (double)0.2
+				));
+		
 		List<Integer> config = new ArrayList<Integer>(Arrays.asList(50, 10));
 		
 		NeuronNetwork neuNet = new NeuronNetwork();
@@ -113,9 +119,10 @@ public class Main {
 				neuNet.LearnNetwork(xlist3, dlist3, true);
 				neuNet.LearnNetwork(xlist4, dlist4, true);
 			}
-			
-			
 		}
+		
+//		neuNet.ApplyX(xlist5);
+//		neuNet.PrintNeuron();
 				
 	}
 }
