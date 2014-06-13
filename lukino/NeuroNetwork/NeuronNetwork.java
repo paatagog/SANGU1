@@ -2,7 +2,6 @@ package lukino.NeuroNetwork;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.text.DecimalFormat;
 
 public class NeuronNetwork {
@@ -24,7 +23,7 @@ public class NeuronNetwork {
 	}
 
 	//Calculate Random Numbers And Set To Neuron
-	private void SetRandomW(){
+	public void SetRandomW(int numOfW){
 		List<Double> wList;
 		Neuron neuron;
 		for (int i = 0; i < layers.size(); i++){
@@ -32,7 +31,7 @@ public class NeuronNetwork {
 				neuron = layers.get(i).get(j);
 				wList = new ArrayList<Double>();
 				if(i == 0){
-					for (int k = 0; k < layers.get(i).size(); k++){
+					for (int k = 0; k < numOfW; k++){
 						wList.add(Math.random());
 					}
 				}
@@ -68,7 +67,7 @@ public class NeuronNetwork {
 					neuron = layers.get(i).get(j);
 					double delta = 0;
 					
-					for(int k = 0; k < layers.get(i).get(j).w.size(); k++){
+					for(int k = 0; k < layers.get(i+1).size(); k++){
 						//jami shedegi neironebis w-ebis da deltebis namravlebis
 						Neuron nextNeuron = layers.get(i+1).get(k);
 						delta += deltas.get(i+1).get(k) * nextNeuron.w.get(j); 
@@ -150,7 +149,7 @@ public class NeuronNetwork {
 		}
 		
 		//Fill Network With Random Ws
-		SetRandomW();
+		//SetRandomW();
 	}
 
 	private void ApplyX(List<Double> x){
@@ -186,15 +185,15 @@ public class NeuronNetwork {
 		int lastLayerNumber = layers.size() - 1;
 		DecimalFormat df = new DecimalFormat("#.######");
 
-//		for(int j = 0; j < layers.get(lastLayerNumber).size(); j++){
-//			Neuron neuronlast = layers.get(lastLayerNumber).get(j);
-//			System.out.println("d = " + d.get(j));
-//			System.out.println("y = " + df.format(neuronlast.calculateY()));
-//		}
+		for(int j = 0; j < layers.get(lastLayerNumber).size(); j++){
+			Neuron neuronlast = layers.get(lastLayerNumber).get(j);
+			System.out.println("d = " + d.get(j));
+			System.out.println("y = " + df.format(neuronlast.calculateY()));
+		}
 	
-		Neuron neuronlast = layers.get(lastLayerNumber).get(0);
-		System.out.println("d = " + d.get(0));
-		System.out.println("y = " + df.format(neuronlast.calculateY()));
+//		Neuron neuronlast = layers.get(lastLayerNumber).get(0);
+//		System.out.println("d = " + d.get(0));
+//		System.out.println("y = " + df.format(neuronlast.calculateY()));
 	
 		System.out.println("--------------------------------------------");
 	}

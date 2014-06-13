@@ -36,11 +36,11 @@ public class Main {
 				));
 		
 		List<Double> dlist1 = new ArrayList<Double>(Arrays.asList(
-				(double)0.9, (double)0.9, (double)0.9, (double)0.9, (double)0.9,
-				(double)0.9, (double)0.9, (double)0.9, (double)0.9, (double)0.9,
-				(double)0.9, (double)0.9, (double)0.9, (double)0.9, (double)0.9,
-				(double)0.9, (double)0.9, (double)0.9, (double)0.9, (double)0.9,
-				(double)0.9, (double)0.9, (double)0.9, (double)0.9, (double)0.9
+				(double)0.7, (double)0.7, (double)0.7, (double)0.7, (double)0.7,
+				(double)0.7, (double)0.7, (double)0.7, (double)0.7, (double)0.7,
+				(double)0.7, (double)0.7, (double)0.7, (double)0.7, (double)0.7,
+				(double)0.7, (double)0.7, (double)0.7, (double)0.7, (double)0.7,
+				(double)0.7, (double)0.7, (double)0.7, (double)0.7, (double)0.7
 				));
 		
 		List<Double> xlist2 = new ArrayList<Double>(Arrays.asList(
@@ -52,11 +52,11 @@ public class Main {
 				));
 		
 		List<Double> dlist2 = new ArrayList<Double>(Arrays.asList(
-				(double)0.7, (double)0.7, (double)0.7, (double)0.7, (double)0.7,
-				(double)0.7, (double)0.7, (double)0.7, (double)0.7, (double)0.7,
-				(double)0.7, (double)0.7, (double)0.7, (double)0.7, (double)0.7,
-				(double)0.7, (double)0.7, (double)0.7, (double)0.7, (double)0.7,
-				(double)0.7, (double)0.7, (double)0.7, (double)0.7, (double)0.7
+				(double)0.6, (double)0.6, (double)0.6, (double)0.6, (double)0.6,
+				(double)0.6, (double)0.6, (double)0.6, (double)0.6, (double)0.6,
+				(double)0.6, (double)0.6, (double)0.6, (double)0.6, (double)0.6,
+				(double)0.6, (double)0.6, (double)0.6, (double)0.6, (double)0.6,
+				(double)0.6, (double)0.6, (double)0.6, (double)0.6, (double)0.6
 				));
 		
 		List<Double> xlist3 = new ArrayList<Double>(Arrays.asList(
@@ -68,11 +68,11 @@ public class Main {
 				));
 		
 		List<Double> dlist3 = new ArrayList<Double>(Arrays.asList(
-				(double)0.1, (double)0.1, (double)0.1, (double)0.1, (double)0.1,
-				(double)0.1, (double)0.1, (double)0.1, (double)0.1, (double)0.1,
-				(double)0.1, (double)0.1, (double)0.1, (double)0.1, (double)0.1,
-				(double)0.1, (double)0.1, (double)0.1, (double)0.1, (double)0.1,
-				(double)0.1, (double)0.1, (double)0.1, (double)0.1, (double)0.1
+				(double)0.3, (double)0.3, (double)0.3, (double)0.3, (double)0.3,
+				(double)0.3, (double)0.3, (double)0.3, (double)0.3, (double)0.3,
+				(double)0.3, (double)0.3, (double)0.3, (double)0.3, (double)0.3,
+				(double)0.3, (double)0.3, (double)0.3, (double)0.3, (double)0.3,
+				(double)0.3, (double)0.3, (double)0.3, (double)0.3, (double)0.3
 				));
 		
 		List<Double> xlist4 = new ArrayList<Double>(Arrays.asList(
@@ -84,18 +84,20 @@ public class Main {
 				));
 		
 		List<Double> dlist4 = new ArrayList<Double>(Arrays.asList(
-				(double)0.3, (double)0.3, (double)0.3, (double)0.3, (double)0.3,
-				(double)0.3, (double)0.3, (double)0.3, (double)0.3, (double)0.3,
-				(double)0.3, (double)0.3, (double)0.3, (double)0.3, (double)0.3,
-				(double)0.3, (double)0.3, (double)0.3, (double)0.3, (double)0.3,
-				(double)0.3, (double)0.3, (double)0.3, (double)0.3, (double)0.3
+				(double)0.4, (double)0.4, (double)0.4, (double)0.4, (double)0.4,
+				(double)0.4, (double)0.4, (double)0.4, (double)0.4, (double)0.4,
+				(double)0.4, (double)0.4, (double)0.4, (double)0.4, (double)0.4,
+				(double)0.4, (double)0.4, (double)0.4, (double)0.4, (double)0.4,
+				(double)0.4, (double)0.4, (double)0.4, (double)0.4, (double)0.4
 				));
 		
-		List<Integer> config = new ArrayList<Integer>(Arrays.asList(25, 25));
+		List<Integer> config = new ArrayList<Integer>(Arrays.asList(50, 10));
 		
 		NeuronNetwork neuNet = new NeuronNetwork();
 		
 		neuNet.InitilializeNetwork(config); 
+		
+		neuNet.SetRandomW(xlist.size());
 		
 		for (int i = 0; i < 10000; i++) {
 			if(i != 9999){ // Dont Print ---
