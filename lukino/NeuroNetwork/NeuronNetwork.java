@@ -6,10 +6,10 @@ import java.text.DecimalFormat;
 
 public class NeuronNetwork {
 
-	//Mtliani neironuli qseli
+	//Neural network
 	public List<List<Neuron>> layers = new ArrayList<List<Neuron>>();
 
-	//delta koeficientebis listi
+	//List of deltas
 	private List<List<Double>> deltas = new ArrayList<List<Double>>();
 
 	//The answers which we want to get 
@@ -46,8 +46,6 @@ public class NeuronNetwork {
 		}
 	} 
 
-	
-	//deltebis gamotvla
 	private void CalculateDeltas(){
 		Neuron neuron;
 		List<Double> layerDeltas;
@@ -86,11 +84,6 @@ public class NeuronNetwork {
 		}
 	}
 
-	
-	//deltebis nazrdebis gamotvla da konkretuli neironistvis axali w-s dayeneba
-	
-	
-	
 	private void CalculateDeltaW(){
 		Neuron neuron;
 		List<Double> previousYList;
@@ -128,11 +121,8 @@ public class NeuronNetwork {
 					}
 				}
 			}
-
 		}
 	}
-
-	
 	
 	//initialize Empty Network
 	public void InitilializeNetwork(List<Integer> config){
@@ -157,21 +147,17 @@ public class NeuronNetwork {
 		}
 	}
 
-	
-	
 	public void ApplyX(List<Double> x){
 		Neuron neuron;
-
-		//pirveli shris neironebis inicializacia
+		//Initialize neurons of first layer
 		for(int j = 0; j < layers.get(0).size(); j++){
 			neuron = layers.get(0).get(j);
 			neuron.setX(x);
 		}
 
-
-		//danarcheni shreebis neironebis inicializacia
+		//initialize neurons for all other layers
 		for(int i = 1; i < layers.size(); i++){
-			//inicializacia, optimizaciistvis
+			//Initialization for optimization
 			List<Double> yList = new ArrayList<Double>();
 			for(int k = 0; k < layers.get(i-1).size(); k++)
 				yList.add(layers.get(i-1).get(k).calculateY());
@@ -183,7 +169,6 @@ public class NeuronNetwork {
 				if (i == layers.size()-1){
 					layers.get(i).get(j).calculateY();
 				}
-
 			}			
 		}
 	}
@@ -198,11 +183,6 @@ public class NeuronNetwork {
 				System.out.println("d = " + d);
 			System.out.println("y = " + df.format(neuronlast.calculateY()));
 		}
-
-//		Neuron neuronlast = layers.get(lastLayerNumber).get(0);
-//		System.out.println("d = " + d.get(0));
-//		System.out.println("y = " + df.format(neuronlast.calculateY()));
-
 		System.out.println("--------------------------------------------");
 	}
 
@@ -211,8 +191,6 @@ public class NeuronNetwork {
 		//Fill Network With Parameters
 		setD(d);
 		ApplyX(x);
-
-		//PrintNeuron();
 
 		for(int i =0 ; i < 1; i++){
 			//Start Calculating New Weights
@@ -223,5 +201,4 @@ public class NeuronNetwork {
 			PrintNeuron(true);
 		}
 	}
-
 }

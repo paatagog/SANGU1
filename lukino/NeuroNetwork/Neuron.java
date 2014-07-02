@@ -21,13 +21,11 @@ public class Neuron {
 	public double fi(double a){
 		return (1/(1+(Math.exp(-a))));
 	}
-	
 	public double fiDerivative(double a){
 		double f = fi(a);
 		return (f / (1-f));
 	}
 	
-	//--------------------------------
 	public List<Double> getW() {
 		return w;
 	}
@@ -40,6 +38,4 @@ public class Neuron {
 	public void setX(List<Double> x) {
 		this.x = x;
 	}
-	
-	
 }
