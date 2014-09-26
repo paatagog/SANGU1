@@ -29,6 +29,7 @@ public class ExcellTest {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			log("ERROR");
+			log("temporary change");
 		}
 	}
 }
